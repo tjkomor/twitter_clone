@@ -11,27 +11,27 @@ class TweetService
   end
 
   def complete_info(id)
-    @tweet_info = parse(connection.get("complete_info/#{id}"))
+    @tweet_info = parse(client.get("complete_info/#{id}"))
   end
 
   def tweets
-    parse(connection.get('tweets'))
+    parse(client.get('tweets'))
   end
 
   def tweet(id)
-    parse(connection.get("tweets/#{id}"))
+    parse(client.get("tweets/#{id}"))
   end
 
   def create_tweet
-    parse(connection.post('tweets', params))
+    parse(client.post('tweets', params))
   end
 
   def update_tweet(id, params)
-    parse(connection.patch("tweets/#{id}", params))
+    parse(client.patch("tweets/#{id}", params))
   end
 
   def delete_tweet(id)
-    parse(connection.delete("tweets/#{id}"))
+    parse(client.delete("tweets/#{id}"))
   end
 
   private

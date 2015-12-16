@@ -1,6 +1,8 @@
 class WelcomeController < ApplicationController
 
   def index
-    @service = TweetService.new(current_user)
+    if current_user
+      @tweets = current_user.tweets
+    end
   end
 end
