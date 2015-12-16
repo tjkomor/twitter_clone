@@ -1,16 +1,19 @@
 <h1>Welcome!</h1>
 
-<%= button_to "Tweet!", tweets_path  %>
-
 <% if current_user %>
   <p>Hello, <%= current_user.name %></p>
-  <%= image_tag current_user.image %>
-  <%= current_user.followers_count %>
-  <%= current_user.friends_count %>
-  <% @tweets.each do |tweet| %>
-    <%= tweet.text %>
+
+  <p>
+  <%= form_for :tweet, url: tweets_path, method: :post do |f| %>
+    <%= f.text_field :message %>
+    <%= f.submit "Tweet!" %>
   <% end %>
-  <%= link_to "Logout", logout_path %>
-<% else %>
-  <%= link_to "Login", login_path %>
-<% end %>
+</p>
+
+ <% @twitter_data.client.user_timeline.each do |tweet| %>
+   <%= tweet.text %>
+  <% end %>
+<%= link_to "Logout", logout_path %>
+
+<%= link_to "Login", login_path %>
+  <% end %>

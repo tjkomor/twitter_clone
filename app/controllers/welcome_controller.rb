@@ -2,12 +2,13 @@ class WelcomeController < ApplicationController
 
   def index
     if current_user
-      @tweets          = current_user.tweets
-      @image           = current_user.image
-      @followers_count = current_user.followers_count
-      @friends_count   = current_user.friends_count
-      @description     = current_user.description
-      @statuses_count  = current_user.statuses_count
+      @twitter_data = api_data(current_user)
     end
+  end
+
+  private
+
+  def api_data(current_user)
+    TwitterService.new(current_user)
   end
 end

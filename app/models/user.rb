@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  include Client
   def self.from_omniauth(auth_info)
     where(uid: auth_info[:uid]).first_or_create do |new_user|
       new_user.uid                = auth_info.uid
@@ -8,6 +7,10 @@ class User < ActiveRecord::Base
       new_user.oauth_token        = auth_info.credentials.token
       new_user.oauth_token_secret = auth_info.credentials.secret
     end
+  end
+
+  def tweet(tweet)
+    twitter_client(self).update(tweet)
   end
 
   def tweets
