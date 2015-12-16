@@ -7,6 +7,7 @@ gem 'rails', '4.2.4'
 gem 'pg'
 gem 'figaro'
 gem 'twitter'
+gem 'materialize-sass'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -35,6 +36,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   gem 'capybara'
   gem 'byebug'
+  gem 'pry-rails'
 end
 
 group :development do
