@@ -2,6 +2,9 @@
 
 <% if current_user %>
   <p>Hello, <%= current_user.name %></p>
+  <%= image_tag current_user.image %>
+  <%= current_user.followers %>
+  <%= current_user.friends %>
   <% @tweets.each do |tweet| %>
     <%= tweet.text %>
   <% end %>
