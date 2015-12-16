@@ -1,10 +1,12 @@
 <h1>Welcome!</h1>
 
+<%= button_to "Tweet!", tweets_path  %>
+
 <% if current_user %>
   <p>Hello, <%= current_user.name %></p>
   <%= image_tag current_user.image %>
-  <%= current_user.followers %>
-  <%= current_user.friends %>
+  <%= current_user.followers_count %>
+  <%= current_user.friends_count %>
   <% @tweets.each do |tweet| %>
     <%= tweet.text %>
   <% end %>

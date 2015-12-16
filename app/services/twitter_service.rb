@@ -1,4 +1,4 @@
-class TweetService
+class TwitterService
   attr_reader :client
 
   def initialize(current_user)
@@ -23,7 +23,7 @@ class TweetService
   end
 
   def create_tweet
-    parse(client.post('tweets', params))
+    parse(client.update('tweets', params))
   end
 
   def update_tweet(id, params)
