@@ -8,7 +8,7 @@
  </div>
 </nav>
 
-<div class="">
+<div class="container">
 
   <% if current_user %>
    <%= @user.description %><br>
@@ -51,16 +51,17 @@
     <li>
       <div class="card black-text">
       <%= tweet.text %>
-      <%= button_to "Favorite", tweet_path(tweet.id), method: :put, class: 'blue' %>
+      <%= link_to "Favorite", tweet_path(tweet.id), method: :put, class: 'blue' %>
       <%= tweet.favorite_count %>
     </div>
-    </li>
-    <% end %>
-  </ul>
+  </li>
+  <% end %>
+</ul>
 </div>
 
 
     </div>
+    
 
 <% else %>
 
@@ -69,3 +70,4 @@
  </div>
 
 <% end %>
+</div>
