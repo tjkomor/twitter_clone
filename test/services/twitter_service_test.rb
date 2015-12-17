@@ -2,21 +2,21 @@ require './test/test_helper'
 
 class TwitterServiceTest < ActiveSupport::TestCase
 
-    def create_tyler
-    user = User.create(name: "Tyler Komoroske",
-                       screen_name: 'tjkomor',
-                       uid: ENV['tyler_uid'],
-                       oauth_token: ENV['tyler_access_token'],
-                       oauth_token_secret: ENV['tyler_access_token_secret']
-                        )
-    end
+  def create_tyler
+  user = User.create(name: "Tyler Komoroske",
+                     screen_name: 'tjkomor',
+                     uid: ENV['tyler_uid'],
+                     oauth_token: ENV['tyler_access_token'],
+                     oauth_token_secret: ENV['tyler_access_token_secret']
+                      )
+  end
 
   test "VCR correctly setup" do
     VCR.use_cassette('twitter_service#home_feed') do
       user = create_tyler
       service = TwitterService.new(user)
-  
-      assert_equal "more tweets", service.client.user_timeline.first.text
+
+      assert_equal "@patwey testing 1-2-3", service.client.user_timeline.first.text
     end
   end
 

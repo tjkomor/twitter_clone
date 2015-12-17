@@ -1,39 +1,18 @@
 require "test_helper"
 class UserLogsInWithTwitterTest < ActionDispatch::IntegrationTest
-  include Capybara::DSL
-  def setup
-    Capybara.app = Tweet4trump::Application
-    stub_omniauth
+
+    test "logging in" do
+      VCR.use_cassette('twitter_service#log_in', :record => :new_episodes) do
+      visit "/"
+      assert_equal 200, page.status_code
+      click_button "Login"
+      assert_equal "/", current_path
+      assert page.has_content?("Tyler")
+      assert page.has_link?("Logout")
+
+      click_link "Logout"
+      assert page.has_button?("Login")
+    end
   end
 
-  test "logging in" do
-    visit "/"
-    assert_equal 200, page.status_code
-    click_link "Login"
-    assert_equal "/", current_path
-    assert page.has_content?("Horace")
-    assert page.has_link?("logout")
-  end
-
-  def stub_omniauth
-    # first, set OmniAuth to run in test mode
-    OmniAuth.config.test_mode = true
-    # then, provide a set of fake oauth data that
-    # omniauth will use when a user tries to authenticate:
-    OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
-      provider: 'twitter',
-      extra: {
-        raw_info: {
-          user_id: "1234",
-          name: "Horace",
-          screen_name: "worace",
-          image: 'someurl.com'
-        }
-      },
-      credentials: {
-        token: "pizza",
-        secret: "secretpizza"
-      }
-    })
-  end
 end
