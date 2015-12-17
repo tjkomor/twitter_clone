@@ -1,19 +1,38 @@
-<h1>Welcome!</h1>
+<nav>
+ <div class="nav-wrapper">
+   <a href="#" class="brand-logo center"></a>
+   <a href="#" class="brand-logo">Tweet4Trump</a>
+   <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+   </ul>
+ </div>
+</nav>
 
 <% if current_user %>
-  <p>Hello, <%= current_user.name %></p>
+ <p>Hello, <%= @user.name %></p>
+ <%= image_tag @user.image %><br>
+ <%= @user.description %><br>
+ My followers count:<%= @user.followers_count %><br>
+ My friends count: <%= @user.friends_count %><br>
+ My tweet number: <%= @user.description %><br>
+<br><br>
 
-  <p>
-  <%= form_for :tweet, url: tweets_path, method: :post do |f| %>
-    <%= f.text_field :message %>
-    <%= f.submit "Tweet!" %>
-  <% end %>
-</p>
+ <p>
+ <%= form_for :tweet, url: tweets_path, method: :post do |f| %>
+   <%= f.text_field :message %>
+   <%= f.submit "Tweet" %>
+ <% end %>
 
- <% @twitter_data.client.user_timeline.each do |tweet| %>
-   <%= tweet.text %>
-  <% end %>
-<%= link_to "Logout", logout_path %>
+ </p>
 
-<%= link_to "Login", login_path %>
-  <% end %>
+ <ul><% @twitter_data.client.user_timeline.take(5).each do |tweet| %>
+   <li>
+     <%= tweet.text %>
+     <%= button_to "Favorite", tweet_path(tweet.id), method: :put %>
+     <%= tweet.favorite_count %>
+   </li>
+ <% end %></ul>
+ <%= link_to "Logout", logout_path %>
+<% else %>
+ <%= link_to "Login", login_path %>
+<% end %>
