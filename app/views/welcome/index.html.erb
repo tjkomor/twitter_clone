@@ -1,38 +1,71 @@
 <nav>
- <div class="nav-wrapper">
+ <div class="nav-wrapper color blue">
    <a href="#" class="brand-logo center"></a>
    <a href="#" class="brand-logo">Tweet4Trump</a>
    <ul id="nav-mobile" class="right hide-on-med-and-down">
-
+     <%= link_to "Logout", logout_path %>
    </ul>
  </div>
 </nav>
 
-<% if current_user %>
- <p>Hello, <%= @user.name %></p>
- <%= image_tag @user.image %><br>
- <%= @user.description %><br>
- My followers count:<%= @user.followers_count %><br>
- My friends count: <%= @user.friends_count %><br>
- My tweet number: <%= @user.description %><br>
-<br><br>
+<div class="">
 
- <p>
- <%= form_for :tweet, url: tweets_path, method: :post do |f| %>
-   <%= f.text_field :message %>
-   <%= f.submit "Tweet" %>
- <% end %>
+  <% if current_user %>
+   <%= @user.description %><br>
+  <br><br>
 
- </p>
 
- <ul><% @twitter_data.client.user_timeline.take(5).each do |tweet| %>
-   <li>
-     <%= tweet.text %>
-     <%= button_to "Favorite", tweet_path(tweet.id), method: :put %>
-     <%= tweet.favorite_count %>
-   </li>
- <% end %></ul>
- <%= link_to "Logout", logout_path %>
+    <div class="container">
+        <div class="card-panel grey lighten-5 z-depth-1">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="<%= @user.image %>" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+            </div>
+            <div class="col s10">
+              <span class="black-text">
+                <%= @user.name %><br>
+                My followers count:<%= @user.followers_count %><br>
+                My friends count: <%= @user.friends_count %><br>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <%= form_for :tweet, url: tweets_path, method: :post do |f| %>
+          <%= f.text_field :message %>
+          <%= f.submit "Tweet", class: 'blue' %>
+        <% end %>
+      </div>
+
+<div class="container">
+  <div class="card-content white-text">
+    <span class="card-title"></span>
+    <div class="row">
+          <div class="col s12">
+            <div class="card grey">
+              <div class="card-content white-text">
+                <span class="card-title">My Tweets</span>
+                <ul><% @twitter_data.client.user_timeline.take(5).each do |tweet| %>
+                  <li>
+                    <div class="card black-text">
+                    <%= tweet.text %>
+                    <%= button_to "Favorite", tweet_path(tweet.id), method: :put, class: 'blue' %>
+                    <%= tweet.favorite_count %>
+                    <% end %>
+                    </div>
+                  </li>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
 <% else %>
+
+<div class="center">
  <%= link_to "Login", login_path %>
+ </div>
+
 <% end %>

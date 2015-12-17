@@ -9,11 +9,10 @@ class User < ActiveRecord::Base
     end
     user = User.find_by(uid: auth_info.uid)
     user.screen_name              = auth_info.extra.raw_info.screen_name
-    user.profile_image_url        = auth_info.info.image
+    user.image                    = auth_info.info.image
     user.description              = auth_info.info.description
     user.followers_count          = auth_info.extra.raw_info.followers_count
     user.friends_count            = auth_info.extra.raw_info.friends_count
-    user.statuses_count           = auth_info.extra.raw_info.statuses_count
     user.save
     user
   end
