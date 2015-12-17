@@ -233,6 +233,20 @@
         null,
         null
       ],
+      "/Users/tylerkomoroske/code/module_3/tweet4trump/app/services/twitter_service.rb": [
+        1,
+        1,
+        null,
+        1,
+        5,
+        5,
+        5,
+        5,
+        5,
+        null,
+        null,
+        null
+      ],
       "/Users/tylerkomoroske/code/module_3/tweet4trump/app/controllers/welcome_controller.rb": [
         1,
         1,
@@ -277,22 +291,8 @@
         null,
         null,
         null
-      ],
-      "/Users/tylerkomoroske/code/module_3/tweet4trump/app/services/twitter_service.rb": [
-        1,
-        1,
-        null,
-        1,
-        5,
-        5,
-        5,
-        5,
-        5,
-        null,
-        null,
-        null
       ]
     },
-    "timestamp": 1450379702
+    "timestamp": 1450379894
   }
 }

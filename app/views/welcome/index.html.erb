@@ -23,7 +23,7 @@
             <div class="col s2">
               <img src="<%= @user.image %>" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
             </div>
-            <div class="col s10">
+            <div class="col s8">
               <span class="black-text">
                 <%= @user.name %><br>
                 My followers count:<%= @user.followers_count %><br>
@@ -44,17 +44,16 @@
       </div>
     </div>
 
-
-
-
-
 <div class="container">
 
-<div class="card-content white-text">
+<div class="card-content black-text center">
   <span class="card-title">My Tweets</span>
-  <ul><% @twitter_data.client.user_timeline.take(5).each do |tweet| %>
+  <ul><% @twitter_data.client.home_timeline.take(5).each do |tweet| %>
     <li>
       <div class="card black-text">
+        <% if tweet.media.present? %>
+          <img src="<%= tweet.media.first.media_url %>" >
+        <% end %><br>
       <%= tweet.text %>
       <%= link_to "Favorite", tweet_path(tweet.id), method: :put, class: 'blue-text' %>
       <%= tweet.favorite_count %>
@@ -63,10 +62,6 @@
   <% end %>
 </ul>
 </div>
-
-
-
-
 
 <% else %>
 
