@@ -15,7 +15,7 @@ class TwitterServiceTest < ActiveSupport::TestCase
     VCR.use_cassette('twitter_service#home_feed') do
       user = create_tyler
       service = TwitterService.new(user)
-      
+  
       assert_equal "more tweets", service.client.user_timeline.first.text
     end
   end
