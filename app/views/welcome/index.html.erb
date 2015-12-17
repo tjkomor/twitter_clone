@@ -40,26 +40,26 @@
       </div>
 
 <div class="container">
-  <div class="card-content white-text">
-    <span class="card-title"></span>
-    <div class="row">
-          <div class="col s12">
-            <div class="card grey">
-              <div class="card-content white-text">
-                <span class="card-title">My Tweets</span>
-                <ul><% @twitter_data.client.user_timeline.take(5).each do |tweet| %>
-                  <li>
-                    <div class="card black-text">
-                    <%= tweet.text %>
-                    <%= button_to "Favorite", tweet_path(tweet.id), method: :put, class: 'blue' %>
-                    <%= tweet.favorite_count %>
-                    <% end %>
-                    </div>
-                  </li>
-              </div>
-            </div>
-          </div>
-        </div>
+
+
+
+<div class="container">
+
+<div class="card-content white-text">
+  <span class="card-title">My Tweets</span>
+  <ul><% @twitter_data.client.user_timeline.take(5).each do |tweet| %>
+    <li>
+      <div class="card black-text">
+      <%= tweet.text %>
+      <%= button_to "Favorite", tweet_path(tweet.id), method: :put, class: 'blue' %>
+      <%= tweet.favorite_count %>
+    </div>
+    </li>
+    <% end %>
+  </ul>
+</div>
+
+
     </div>
 
 <% else %>
